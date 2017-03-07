@@ -1,0 +1,46 @@
+{% if is_paginated %}
+    <div class="row bottom-margin">
+        <div class="col-sm-offset-4 col-sm-4">
+            <div class="btn-group btn-group-justified ">
+                {% if page_obj.has_previous %}
+                    <a class="btn btn-primary" href="{{ request.path }}?page={{ page_obj.previous_page_number }}">
+                        <strong>
+                            <span class="glyphicon glyphicon-backward"></span>
+                        </strong>
+                    </a>
+                {% else %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary disabled">
+                            <strong>
+                                <span class="glyphicon glyphicon-backward"></span>
+                            </strong>
+                        </button>
+                    </div>
+                {% endif %}
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary disabled">
+                        <strong>
+                            {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+                        </strong>
+
+                    </button>
+                </div>
+                {% if page_obj.has_next %}
+                    <a class="btn btn-primary" href="{{ request.path }}?page={{ page_obj.next_page_number }}">
+                        <strong>
+                            <span class="glyphicon glyphicon-forward"></span>
+                        </strong>
+                    </a>
+                {% else %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary disabled">
+                            <strong>
+                                <span class="glyphicon glyphicon-forward"></span>
+                            </strong>
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endif %}

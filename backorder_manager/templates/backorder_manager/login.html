@@ -1,0 +1,57 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block jumbo-header %}Login{% endblock %}
+{% block jumbo-text %}
+    {% if user.is_authenticated %}
+        <p>You are logged in as {{ user.first_name }} {{ user.last_name }}</p>
+    {% else %}
+        <p>Please enter the credentials below.</p>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if form.errors %}
+        <div class="row">
+            <div class="col-sm-offset-4 col-sm-4 alert alert-danger text-center">
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        {{ error|escape }}
+                    {% endfor %}
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    {{ error|escape }}
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    {% if next %}
+        <div class="row">
+            <div class="col-sm-offset-4 col-sm-4 alert alert-danger text-center">
+                {% if user.is_authenticated %}
+                    Your account doesn't have access to this page.<br />To proceed, please login with an account that has access.
+                {% else %}
+                    Please login to see this page.
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+
+
+        <div class="container text-center">
+            <form class="form-inline" action="#" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="sr-only" for="{{ form.username.id_for_label }}">{{ form.username.label }}:</label>
+                    <input class="form-control" autofocus="" id="{{ form.username.id_for_label }}" maxlength="254" name="{{ form.username.html_name}}" required="" type="text" placeholder="{{ form.username.label }}">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="{{ form.password.id_for_label }}">{{ form.password.label }}:</label>
+                    <input class="form-control" autofocus="" id="{{ form.password.id_for_label }}" maxlength="254" name="{{ form.password.html_name}}" required="" type="password" placeholder="{{ form.password.label }}">
+                </div>
+                <input type="submit" value="Login" class="btn btn-default"/>
+            </form>
+        </div>
+
+{% endblock %}

@@ -1,0 +1,101 @@
+{% extends 'backorder_manager/base.html' %}
+{% load static %}
+{% block html_head %}
+	<script src="{% static 'backorder_manager/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'backorder_manager/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css' %}" />
+{% endblock %}
+{% block title %}Edit item{% endblock %}
+{% block jumbo-header %}Edit item{% endblock %}
+{% block jumbo-text %}
+    for {{ customer_order }}
+{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6 ">
+                    {% if form.errors %}
+                        <div class="col-sm-offset-4">
+                            <div class="alert alert-danger text-center">
+                                <strong>Error</strong>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <form action="#" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.supplier.id_for_label }}">{{ form.supplier.label }}</label>
+                                <div class="col-sm-8">
+                                    {{ form.supplier }}
+                                     {% if form.supplier.errors %}
+                                        <span class="alert-danger">{{ form.supplier.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.number.id_for_label }}">{{ form.number.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.number.id_for_label }}" maxlength="254" name="{{ form.number.html_name}}" type="text" placeholder="{{ form.number.label }}" value="{{ form.number.value|default_if_none:"" }}">
+                                    {% if form.number.errors %}
+                                        <span class="alert-danger">{{ form.number.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.name.id_for_label }}" maxlength="254" name="{{ form.name.html_name}}" required="" type="text" placeholder="{{ form.name.label }}" value="{{ form.name.value|default_if_none:"" }}">
+                                    {% if form.name.errors %}
+                                        <span class="alert-danger">{{ form.name.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.quantity.id_for_label }}">{{ form.quantity.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.quantity.id_for_label }}" maxlength="254" name="{{ form.quantity.html_name}}" required="" type="text" placeholder="{{ form.quantity.label }}" value="{{ form.quantity.value|default_if_none:"" }}">
+                                    {% if form.quantity.errors %}
+                                        <span class="alert-danger">{{ form.quantity.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.delivery_date.id_for_label }}">{{ form.delivery_date.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" autofocus="" id="{{ form.delivery_date.id_for_label }}" maxlength="254" name="{{ form.delivery_date.html_name}}" type="text" placeholder="{{ form.delivery_date.label }}" value="{{ form.delivery_date.value|default_if_none:"" }}">
+                                    {% if form.delivery_date.errors %}
+                                        <span class="alert-danger">{{ form.delivery_date.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.status.id_for_label }}">{{ form.status.label }}</label>
+                                <div class="col-sm-8">
+                                    {{ form.status }}
+                                    {% if form.status.errors %}
+                                        <span class="alert-danger">{{ form.status.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.order_date.id_for_label }}">{{ form.order_date.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" autofocus="" id="{{ form.order_date.id_for_label }}" maxlength="254" name="{{ form.order_date.html_name}}"  type="text" placeholder="{{ form.order_date.label }}" value="{{ form.order_date.value|default_if_none:"" }}">
+                                    {% if form.order_date.errors %}
+                                        <span class="alert-danger">{{ form.order_date.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-6">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    <script>
+        $('.datepicker').datepicker();
+    </script>
+{% endblock %}

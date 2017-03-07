@@ -1,0 +1,32 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Orders{% endblock %}
+{% block orders_active %}active{% endblock %}
+{% block jumbo-header %}Orders{% endblock %}
+{% block jumbo-text %}
+{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <p>
+                        <a href="{% url 'order_create' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                New order
+                            </strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <p>
+                        <a href="{% url 'order_list' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                Order list
+                            </strong>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+{% endblock %}

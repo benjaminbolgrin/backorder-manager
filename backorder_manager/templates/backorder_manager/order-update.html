@@ -1,0 +1,97 @@
+{% extends 'backorder_manager/base.html' %}
+{% load static %}
+{% block html_head %}
+	<script src="{% static 'backorder_manager/bootstrap-datepicker-1.6.4-dist/js/bootstrap-datepicker.min.js' %}"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'backorder_manager/bootstrap-datepicker-1.6.4-dist/css/bootstrap-datepicker.css' %}" />
+{% endblock %}
+{% block title %}Edit order{% endblock %}
+{% block jumbo-header %}Edit order{% endblock %}
+{% block jumbo-text %}
+{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6 ">
+                    {% if form.errors %}
+                        <div class="col-sm-offset-4">
+                            <div class="alert alert-danger text-center">
+                                <strong>Error</strong>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <form action="#" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.order_number.id_for_label }}">{{ form.order_number.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.order_number.id_for_label }}" maxlength="254" name="{{ form.order_number.html_name}}" required="" type="text" placeholder="{{ form.order_number.label }}" value="{{ form.order_number.value|default_if_none:"" }}">
+                                    {% if form.order_number.errors %}
+                                        <span class="alert-danger">{{ form.order_number.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.order_date.id_for_label }}">{{ form.order_date.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" data-provide="datepicker" data-date-format="yyyy-mm-dd" autofocus="" id="{{ form.order_date.id_for_label }}" maxlength="254" name="{{ form.order_date.html_name}}" required="" type="text" placeholder="{{ form.order_date.label }}" value="{{ form.order_date.value|default_if_none:"" }}">
+                                    {% if form.order_date.errors %}
+                                        <span class="alert-danger">{{ form.order_date.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.first_name.id_for_label }}">{{ form.first_name.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.first_name.id_for_label }}" maxlength="254" name="{{ form.first_name.html_name}}" required="" type="text" placeholder="{{ form.first_name.label }}" value="{{ form.first_name.value|default_if_none:"" }}">
+                                    {% if form.first_name.errors %}
+                                        <span class="alert-danger">{{ form.first_name.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.last_name.id_for_label }}">{{ form.last_name.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.last_name.id_for_label }}" maxlength="254" name="{{ form.last_name.html_name}}" required="" type="text" placeholder="{{ form.last_name.label }}" value="{{ form.last_name.value|default_if_none:"" }}">
+                                    {% if form.last_name.errors %}
+                                        <span class="alert-danger">{{ form.last_name.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.phone.id_for_label }}" maxlength="254" name="{{ form.phone.html_name}}" required="" type="text" placeholder="{{ form.phone.label }}" value="{{ form.phone.value|default_if_none:"" }}">
+                                    {% if form.phone.errors %}
+                                        <span class="alert-danger">{{ form.phone.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" autofocus="" id="{{ form.email.id_for_label }}" maxlength="254" name="{{ form.email.html_name}}" required="" type="text" placeholder="{{ form.email.label }}" value="{{ form.email.value|default_if_none:"" }}">
+                                    {% if form.email.errors %}
+                                        <span class="alert-danger">{{ form.email.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="col-sm-4 control-label" for="{{ form.notice.id_for_label }}">{{ form.notice.label }}</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" rows="5" id="{{ form.notice.id_for_label }}" name="{{ form.notice.html_name}}" placeholder="{{ form.notice.label }}" value="{{ form.notice.value|default_if_none:"" }}"></textarea>
+                                    {% if form.notice.errors %}
+                                        <span class="alert-danger">{{ form.notice.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-4 col-sm-6">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+{% endblock %}

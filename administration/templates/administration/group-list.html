@@ -1,0 +1,41 @@
+{% extends 'administration/admin-base.html' %}
+
+{% block title %}Edit group{% endblock %}
+{% block jumbo-header %}Edit group{% endblock %}
+{% block jumbo-text %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+            {% if object_list %}
+                    {% for group in object_list %}
+                        <div class="row alert-info top-margin">
+                            <div class="col-sm-offset-3 col-sm-2 text-center">
+                                <p class="text-muted">
+                                    {{ group.name }}
+                                </p>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <a class="btn btn-primary margin" href="{% url 'administration:group_update' pk=group.id %}">
+                                    <strong>
+                                        Edit
+                                    </strong>
+                                </a>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                <a class="btn btn-danger margin" href="{% url 'administration:group_delete' pk=group.id %}">
+                                    <strong>
+                                        Delete
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {% else %}
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <p class="alert alert-danger text-center">There are no groups in the database.</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+{% endblock %}

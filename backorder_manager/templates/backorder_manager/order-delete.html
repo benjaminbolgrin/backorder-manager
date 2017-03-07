@@ -1,0 +1,26 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Delete Order{% endblock %}
+{% block jumbo-header %}Delete Order{% endblock %}
+{% block jumbo-text %}
+    <p>
+        {{ object }}
+    </p>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-4 col-sm-4 ">
+                <form action="#" method="post" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="alert alert-danger text-center">
+                        Are you sure you want to <strong>delete</strong> order<br /><strong> {{ object }}</strong>?
+                    </div>
+                    <button type="submit" class="btn btn-danger btn-block btn-lg">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

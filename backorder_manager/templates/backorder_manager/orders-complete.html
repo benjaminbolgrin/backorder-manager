@@ -1,0 +1,52 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Complete orders{% endblock %}
+{% block done_active %}active{% endblock %}
+{% block jumbo-header %}Complete{% endblock %}
+{% block jumbo-text %}These orders are complete and ready to fulfill{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if object_list %}
+            {% include 'backorder_manager/paginator.html' %}
+            <div class="row alert">
+                <div class="col-sm-4">
+                    <strong>
+                        Order date
+                    </strong>
+                </div>
+                <div class="col-sm-4">
+                    <strong>
+                        Order
+                    </strong>
+                </div>
+            </div>
+            {% for order in object_list %}
+                <div class="row alert alert-success">
+                    <div class="col-sm-4">
+                        {{ order.order_date }}
+                    </div>
+                    <div class="col-sm-4">
+                        <a href="{% url 'order_details' pk=order.pk %}">
+                            {{ order }}
+                        </a>
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <a href="{% url 'order_archive' pk=order.pk %}" class="btn btn-primary">
+                            <strong>
+                                Archive
+                            </strong>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+            {% include 'backorder_manager/paginator.html' %}
+        {% else %}
+            <p class="alert alert-danger text-center">
+                <strong>
+                    There are no items in the database.
+                </strong>
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

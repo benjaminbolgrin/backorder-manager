@@ -1,0 +1,34 @@
+{% extends 'administration/admin-base.html' %}
+
+{% block title %}Users{% endblock %}
+{% block jumbo-header %}Users{% endblock %}
+{% block jumbo-text %}
+    <p>
+        Create, edit or delete users
+    </p>
+{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <p>
+                        <a href="{% url 'administration:user_create' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                Create new user
+                            </strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <p>
+                        <a href="{% url 'administration:user_list' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                Edit or delete users
+                            </strong>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+{% endblock %}

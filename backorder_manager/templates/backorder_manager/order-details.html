@@ -1,0 +1,188 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Order details{% endblock %}
+{% block orders_active %}active{% endblock %}
+{% block jumbo-header %}Order details{% endblock %}
+{% block jumbo-text %}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <h3>#{{ object.order_number }}</h3>
+            </div>
+            <div class="col-sm-4 text-center">
+                <h3>{{ object.order_date }}</h3>
+            </div>
+            <div class="col-sm-4 text-right">
+                <h3>
+                    {% for k,v in object.status_choices %}
+                        {% if k == object.status %}
+                            {{ v }}
+                        {% endif %}
+                    {% endfor %}
+                </h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <h3>{{ object.first_name }} {{ object.last_name }}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <strong>Email: </strong>{{ object.email }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <strong>Phone: </strong>{{ object.phone }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <h3>Notice:</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="well">
+                        {% if object.notice %}
+                            {{ object.notice }}
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 ">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <a href="{% url 'order_update' pk=object.pk %}" class="btn btn-info btn-block">
+                            <strong>
+                                Edit
+                            </strong>
+                        </a>
+                    </div>
+                    <div class="col-sm-6">
+                        <a href="{% url 'order_delete' pk=object.pk %}" class="btn btn-danger btn-block">
+                            <strong>
+                                Delete
+                            </strong>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <h3>Items</h3>
+                    </div>
+                </div>
+                {% if object.orderitem_set.all %}
+                    <div class="row">
+                        <div class="col-sm-2 text-center">
+                            <strong>
+                                Supplier
+                            </strong>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <strong>
+                                Item number
+                            </strong>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <strong>
+                                Item name
+                            </strong>
+                        </div>
+                        <div class="col-sm-1 text-center">
+                            <strong>
+                                Quantity
+                            </strong>
+                        </div>
+                        <div class="col-sm-2 text-center">
+                            <strong>
+                                Delivery Date
+                            </strong>
+                        </div>
+                        <div class="col-sm-1 text-center">
+                            <strong>
+                                Status
+                            </strong>
+                        </div>
+                    </div>
+                    {% for item in object.orderitem_set.all %}
+                        <div class="row  alert {% if item.status == 1 %}alert-danger{% elif item.status == 2 %}alert-warning{% elif item.status == 3 %}alert-success{% else %}alert-info{% endif %}">
+                            <div class="col-sm-2 text-center">
+                                <a href="{% url 'supplier_detail' pk=item.supplier.pk %}">{{ item.supplier }}</a>
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                {{ item.number }}
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                {{ item.name }}
+                            </div>
+                            <div class="col-sm-1 text-center">
+                                {{ item.quantity }}
+                            </div>
+                            <div class="col-sm-2 text-center">
+                                {{ item.delivery_date }}
+                            </div>
+                            <div class="col-sm-1 text-center">
+                                {% for k,v in item.status_choices %}
+                                    {% if k == item.status %}
+                                        {{ v }}
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <div class="col-sm-1 text-center">
+                                <a href="{% url 'item_update' pk=item.pk %}" class="btn btn-info">
+                                    <strong>
+                                        Edit
+                                    </strong>
+                                </a>
+                            </div>
+                            <div class="col-sm-1 text-center">
+                                <a href="{% url 'item_delete' pk=item.pk%}" class="btn btn-danger">
+                                    <strong>
+                                        Delete
+                                    </strong>
+                                </a>
+                            </div>
+                        </div>
+                       {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <p class="alert alert-danger">
+                        No items found
+                    </p>
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-sm-4">
+                <a href="{% url 'item_create' order_id=object.pk %}" class="btn btn-success btn-block">
+                    <strong>
+                        Add item
+                    </strong>
+                </a>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

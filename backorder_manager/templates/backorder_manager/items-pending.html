@@ -1,0 +1,62 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Pending orders{% endblock %}
+{% block pending_active %}active{% endblock %}
+{% block jumbo-header %}Pending orders{% endblock %}
+{% block jumbo-text %}Purchase orders for these items have not been sent to the supplier{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if object_list %}
+            {% include 'backorder_manager/paginator.html' %}
+            <div class="row alert">
+                <div class="col-sm-2">
+                    <strong>
+                        Supplier
+                    </strong>
+                </div>
+                <div class="col-sm-2">
+                    <strong>
+                        Item
+                    </strong>
+                </div>
+                <div class="col-sm-2">
+                    <strong>
+                        Quantity
+                    </strong>
+                </div>
+                <div class="col-sm-3">
+                    <strong>
+                        Order
+                    </strong>
+                </div>
+            </div>
+                {% for item in object_list %}
+                    <div class="row alert alert-danger">
+                        <div class="col-sm-2">
+                            <a href="{% url 'supplier_detail' pk=item.supplier.id %}">{{ item.supplier }}</a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="{% url 'item_update' pk=item.id %}">{{ item.name }}</a>
+                        </div>
+                        <div class="col-sm-2">
+                            {{ item.quantity }}
+                        </div>
+                        <div class="col-sm-3">
+                            <a href="{% url 'order_details' pk=item.customer_order.id %}">{{ item.customer_order }}</a>
+                        </div>
+                        <div class="col-sm-offset-1 col-sm-2 text-center">
+                            <a href="{% url 'item_ordered' pk=item.id %}" class="btn btn-primary"><strong>Order sent</strong></a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% include 'backorder_manager/paginator.html' %}
+        {% else %}
+            <p class="alert alert-danger text-center">
+                <strong>
+                    There are no items in the database.
+                </strong>
+            </p>
+        {% endif %}
+        </div>
+{% endblock %}

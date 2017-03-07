@@ -1,0 +1,70 @@
+{% extends 'administration/admin-base.html' %}
+
+{% block title %}Create supplier{% endblock %}
+{% block jumbo-header %}Create supplier{% endblock %}
+{% block jumbo-text %}
+    <p>
+        Please enter the credentials below
+    </p>
+{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                    {% if form.errors %}
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <p class="alert alert-danger text-center"><strong>Error</strong></p>
+
+                        </div>
+                    {% endif %}
+                    <form action="#" method="post" class="form-horizontal">
+                        {% csrf_token %}
+
+                            <div class="form-group">
+                                <label class="col-sm-offset-2 col-sm-3 control-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" autofocus="" id="{{ form.name.id_for_label }}" maxlength="254" name="{{ form.name.html_name}}" required="" type="text" placeholder="{{ form.name.label }}" value="{{ form.name.value|default_if_none:"" }}">
+                                    {% if form.name.errors %}
+                                        <span class="alert-danger">{{ form.name.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-offset-2 col-sm-3 control-label" for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" autofocus="" id="{{ form.email.id_for_label }}" maxlength="254" name="{{ form.email.html_name}}" type="text" placeholder="{{ form.email.label }}" value="{{ form.email.value|default_if_none:"" }}">
+                                    {% if form.email.errors %}
+                                        <span class="alert-danger">{{ form.email.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-offset-2 col-sm-3 control-label" for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" autofocus="" id="{{ form.phone.id_for_label }}" maxlength="254" name="{{ form.phone.html_name}}" type="text" placeholder="{{ form.phone.label }}" value="{{ form.phone.value|default_if_none:"" }}">
+                                    {% if form.phone.errors %}
+                                        <span class="alert-danger">{{ form.phone.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-offset-2 col-sm-3 control-label" for="{{ form.customer_number.id_for_label }}">{{ form.customer_number.label }}</label>
+                                <div class="col-sm-3">
+
+                                    <input class="form-control" autofocus="" id="{{ form.customer_number.id_for_label }}" maxlength="254" name="{{ form.customer_number.html_name}}" type="text" placeholder="{{ form.customer_number.label }}" value="{{ form.customer_number.value|default_if_none:"" }}">
+                                    {% if form.customer_number.errors %}
+                                        <span class="alert-danger">{{ form.customer_number.errors.as_text }}</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-5 col-sm-3 ">
+                                    <button type="submit" class="btn btn-success">Create supplier</button>
+                                </div>
+                            </div>
+                    </form>
+            </div>
+        </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'administration/admin-base.html' %}
+
+{% block title %}Edit supplier{% endblock %}
+{% block jumbo-header %}Edit supplier{% endblock %}
+{% block jumbo-text %}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        {% if success_supplier_name %}
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6 alert alert-success">
+                    {{ success_supplier_name }}
+                </div>
+            </div>
+        {% endif %}
+        {% if object_list %}
+            {% for supplier in object_list %}
+                <div class="row alert-info top-margin">
+                    <div class="col-sm-offset-3 col-sm-2">
+                        <p class="text-muted text-center">{{ supplier.name }}</p>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <a class="btn btn-primary margin" href="{% url 'administration:supplier_update' pk=supplier.id %}">Edit</a>
+                    </div>
+                    <div class="col-sm-2 text-center">
+                        <a class="btn btn-danger margin" href="{% url 'administration:supplier_delete' pk=supplier.id %}">Delete</a>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    <p class="alert alert-danger text-center">There are no suppliers in the database.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends 'administration/admin-base.html' %}
+
+{% block title %}Edit group{% endblock %}
+{% block jumbo-header %}Edit group{% endblock %}
+{% block jumbo-text %}{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                    {% if form.errors %}
+                        <div class="row">
+                            <div class="col-sm-offset-3 col-sm-9">
+                                <p class="alert alert-danger text-center"><strong>Error</strong></p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <form action="#" method="post" class="form-horizontal">
+                        {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-offset-2 col-sm-2 control-label" for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                                    <div class="col-sm-5">
+
+                                        <input class="form-control" autofocus="" id="{{ form.name.id_for_label }}" maxlength="254" name="{{ form.name.html_name}}" required="" type="text" placeholder="{{ form.name.label }}" value="{{ form.name.value|default_if_none:"" }}">
+                                        {% if form.name.errors %}
+                                            <span class="alert-danger">{{ form.name.errors.as_text }}</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <label class="col-sm-offset-2 col-sm-2 control-label" for="{{ form.permissions.id_for_label }}">{{ form.permissions.label }}</label>
+                                    <div class="col-sm-5">
+                                        <select class="form-control" multiple="multiple" id="{{ form.permissions.id_for_label }}" name="{{ form.permissions.name }}" size="10">
+                                            {% for x, y in form.fields.permissions.choices %}
+                                                {% if 'backorder_manager' in y %}
+                                                    <option value="{{ x }}"{% if x in form.permissions.value %} selected="selected"{% endif %}>{{ y }}</option>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-4 col-sm-5">
+                                        <button type="submit" class="btn btn-success">Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </form>
+            </div>
+        </div>
+{% endblock %}

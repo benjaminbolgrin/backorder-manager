@@ -1,0 +1,89 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Dashboard{% endblock %}
+{% block jumbo-header %}Dashboard{% endblock %}
+{% block jumbo-text %}
+    {% if not user.is_authenticated %}
+        <p>You must log in to use Backorder Manager.</p>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container" style="margin: auto;">
+            <div class="row " >
+                <div class="col-md-4">
+                    <div class="col-sm-offset-1 col-sm-10" >
+                        <h3>
+                            New items<br />
+                            <small>
+                                Place an order with your supplier
+                            </small>
+                        </h3>
+                        {% if new_items %}
+                            {% for new_item in new_items %}
+                                <p class="mark text-center">
+                                    <a href="{% url 'order_details' pk=new_item.customer_order.pk %}">
+                                        {{ new_item }}<br />
+                                        {{ new_item.customer_order }}
+                                    </a>
+                                </p>
+                            {% endfor %}
+                        {% else %}
+                            <p class="alert alert-info text-center">
+                                There are no new items
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <h3>
+                            Due items<br />
+                            <small>
+                                Check the delivery date with the supplier
+                            </small>
+                        </h3>
+                        {% if due_items %}
+                            {% for due_item in due_items %}
+                                <p class="mark text-center">
+                                    <a href="{% url 'order_details' pk=due_item.customer_order.pk %}">
+                                        {{ due_item }}<br />
+                                        {{ due_item.customer_order }}
+                                    </a>
+                                </p>
+                            {% endfor %}
+                        {% else %}
+                            <p class="alert alert-info text-center">
+                                There are no due items
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-sm-offset-1 col-sm-10">
+                        <h3>
+                            Complete orders<br />
+                            <small>
+                                Ready to fulfill
+                            </small>
+                        </h3>
+                        {% if complete_orders %}
+                            {% for complete_order in complete_orders %}
+                                <p class="mark text-center">
+                                    <a href="{% url 'order_details' pk=complete_order.pk %}">
+                                        {{ complete_order }}
+                                    </a>
+                                </p>
+                            {% endfor %}
+                        {% else %}
+                            <p class="alert alert-info text-center">
+                                There are no complete orders
+                            </p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

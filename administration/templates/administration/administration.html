@@ -1,0 +1,42 @@
+{% extends 'administration/admin-base.html' %}
+
+{% block title %}Administration{% endblock %}
+{% block jumbo-header %}Administration{% endblock %}
+
+{% block content %}
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <h3>Users<br /><small>Create, edit or delete users</small></h3>
+                    <p>
+                        <a href="{% url 'administration:users' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                Edit users
+                            </strong>
+                        </a>
+                    </p>
+
+                </div>
+                <div class="col-sm-4">
+                    <h3>Groups<br /><small>Create, edit or delete groups</small></h3>
+                    <p>
+                        <a href="{% url 'administration:groups' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                Edit groups
+                            </strong>
+                        </a>
+                    </p>
+                </div>
+                <div class="col-sm-4">
+                    <h3>Suppliers<br /><small>Create, edit or delete suppliers</small></h3>
+                    <p>
+                        <a href="{% url 'administration:suppliers' %}" class="btn btn-primary btn-lg btn-block">
+                            <strong>
+                                Edit suppliers
+                            </strong>
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+{% endblock %}

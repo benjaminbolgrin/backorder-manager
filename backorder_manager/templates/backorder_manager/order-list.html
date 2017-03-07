@@ -1,0 +1,60 @@
+{% extends 'backorder_manager/base.html' %}
+
+{% block title %}Order list{% endblock %}
+{% block orders_active %}active{% endblock %}
+{% block jumbo-header %}
+    Order list
+{% endblock %}
+{% block jumbo-text %}{% endblock %}
+
+{% block content %}
+        <div class="container">
+            {% include 'backorder_manager/paginator.html' %}
+                {% if object_list %}
+                    <div class="row alert">
+                        <div class="col-sm-4">
+                            <strong>
+                                Order date
+                            </strong>
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>
+                                Order
+                            </strong>
+                        </div>
+                        <div class="col-sm-4">
+                            <strong>
+                                Order status
+                            </strong>
+                        </div>
+                    </div>
+                    {% for object in object_list %}
+                        <div class="row alert {% if object.status == 4 %}alert-info{% elif object.status == 3 %}alert-success{% elif object.status == 2 %}alert-warning{% else %}alert-danger{% endif %}">
+                            <div class="col-sm-4">
+                                {{ object.order_date }}
+                            </div>
+                            <div class="col-sm-4">
+                                <a href="{% url 'order_details' pk=object.pk %}">
+                                    {{ object }}
+                                </a>
+                            </div>
+                            <div class="col-sm-4">
+                                <span>
+                                    {% for k,v in object.status_choices %}
+                                        {% if k == object.status %}
+                                            {{ v }}
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    {% include 'backorder_manager/paginator.html' %}
+                {% else %}
+                    <p class="alert alert-danger text-center">
+                        <strong>
+                        There are no items in the database.</strong>
+                    </p>
+                {% endif %}
+        </div>
+{% endblock %}
